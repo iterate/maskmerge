@@ -1,0 +1,46 @@
+syntax = "proto3";
+package prototest;
+
+option go_package = "github.com/iterate/maskmerge/internal/prototest";
+
+message Simple {
+  string field_a = 1;
+  int32 field_b = 2;
+}
+
+message Nested {
+  string field_one = 1;
+  Simple sub_simple = 2;
+}
+
+message A1 {
+  B1 b = 1;
+  repeated int32 c = 2;
+}
+
+message B1 {
+  int32 d = 1;
+  int32 x = 2;
+}
+
+message R1 {
+  A1 f = 1;
+}
+
+message R2 {
+  B1 f = 1;
+}
+
+message A2 {
+  map<string, int32> e = 1;
+}
+
+/*
+f {
+  b {
+    d: 1
+    x: 2
+  }
+  c: [1]
+}
+ */
