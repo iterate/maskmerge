@@ -1,0 +1,35 @@
+name: Go
+
+on: [push, pull_request]
+
+jobs:
+  build:
+    env:
+      CGO_ENABLED: "0"
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Go
+        uses: actions/setup-go@v2
+        with:
+          go-version: ^1.17
+      - name: Test
+        run: go test -v ./...
+
+  lint:
+    env:
+      CGO_ENABLED: "0"
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Go
+        uses: actions/setup-go@v2
+        with:
+          go-version: ^1.17
+      - name: golangci-lint
+        uses: golangci/golangci-lint-action@v2
+        with:
+          version: latest
+          skip-go-installation: true
+          # command line arguments.
+          # args: --issues-exit-code=0
